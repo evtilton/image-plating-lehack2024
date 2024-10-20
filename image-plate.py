@@ -1,6 +1,13 @@
 import argparse
 import time
-
+from PIL import Image
+import matplotlib.pyplot as plt
+from scipy import optimize
+import numpy as np
+from tqdm import trange
+from math import sqrt
+from datetime import datetime
+from numba import jit
 from numba.core.types.scalars import Boolean
 
 parser = argparse.ArgumentParser(description="morph one image into another")
@@ -15,49 +22,31 @@ parser.add_argument("-p",
 parser.add_argument("-v",
   "--vivid",
   default=False,
-  help="specify level of randomization",
+  help="vivid?",
   type=Boolean)
 args = parser.parse_args()
 
 print("initializing..")
 
-from PIL import Image
-import matplotlib.pyplot as plt
-from scipy import optimize
-import numpy as np
-from tqdm import trange
-from math import sqrt
-from datetime import datetime
-from numba import jit
-
 skel_img = Image.open("input/" + args.skeleton_img)
 fill_img = Image.open("input/" + args.filler_img)
-
-## ARGUMENT PARSING ABOVE
-##
-
 dims = skel_img.size
 xres, yres = skel_img.info['dpi']
-
 fill_img = fill_img.resize(dims)
 skel_arr = np.asarray(skel_img)
 fill_arr = np.asarray(fill_img)
-
 rows, cols, _ = skel_arr.shape
 
-## Solve bipartite matching problem. ##
+## bipartite matching problem 
 
 precision = args.precision
-
 total_pixels = skel_arr.size
 
 O = int(sqrt(total_pixels / precision))
-
 r = rows // O
 c = cols // O
 
 tic = time.time()
-
 cost_matrix = np.empty((r, c, r, c))
 
 print("finding optimal matching.. MEAN")
