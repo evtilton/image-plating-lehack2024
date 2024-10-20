@@ -2,6 +2,8 @@ October 20 2024
 Lehigh Valley Hackathon
 Team 20. Ursinus College. Evan Tilton, Michael Connors
 
+#To run on your machine - Requires installation of python version 3.12.7 and dependencies listed in setup.py.
+
 ## AWS and AI Usage
 We used AWS to host an EC2 instance. We downloaded from the github repository and use the EC2 as a virtual computing environment. 
 Many college students don't have access to fast computers, so utilizing virtual computing can help them run resource heavy programs
