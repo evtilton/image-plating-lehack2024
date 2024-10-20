@@ -1,6 +1,6 @@
-# October 20 2024
-# Lehigh Valley Hackathon
-# Team 20. Ursinus College. Evan Tilton, Michael Connors
+October 20 2024
+Lehigh Valley Hackathon
+Team 20. Ursinus College. Evan Tilton, Michael Connors
 
 ## AWS and AI Usage
 We used AWS to host an EC2 instance. We downloaded from the github repository and use the EC2 as a virtual computing environment. 
